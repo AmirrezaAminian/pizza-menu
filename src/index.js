@@ -58,7 +58,8 @@ function App() {
 }
 
 function Header() {
-  const style = {};
+  const style = {}; 
+  
 
   return (
     <header className="header">
@@ -70,15 +71,20 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  const numPizzas = pizzas.length
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
 
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => {
-          return <Pizza pizzaObj={pizza} key={pizza.name} />;
-        })}
-      </ul>
+      {numPizzas > 0 && (
+        <ul className="pizzas">
+          {pizzaData.map((pizza) => {
+            return <Pizza pizzaObj={pizza} key={pizza.name} />;
+          })}
+        </ul>
+      )}
     </main>
   );
 }
@@ -99,13 +105,20 @@ function Pizza(props) {
 
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 28;
+  const openHour = 12;
   const closehour = 22;
   const isOpen = hour >= openHour && hour <= closehour;
 
   return (
     <footer className="footer">
-       {isOpen && <p>We're opem untill {}</p>}
+      {isOpen && (
+        <div className="order">
+          <p>
+            We're opem untill {closehour}:00. Come visit us or order online.
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      )}
     </footer>
   );
 }
